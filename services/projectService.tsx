@@ -91,7 +91,7 @@ export const projectService = {
                 params.append("LanguageId", languageId.toString());
             }
     
-            const response = await axios.get(`${baseUrlApi}/Projects/All?PageNumber=${pageNumber}&PageSize=${pageSize}`);
+            const response = await axios.get(`${baseUrlApi}/Projects/All?PageNumber=${pageNumber}&PageSize=${pageSize}&${params.toString()}`);
             
             if (!Array.isArray(response.data.items)) {
                 console.error("Resposta inesperada da API:", response.data);
