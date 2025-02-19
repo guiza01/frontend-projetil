@@ -45,7 +45,7 @@ const DropDown: React.FC<DropdownProps> = ({ buttonLabel, ariaLabel, dropdownIte
                 break;
         }
     };
-
+    
     useEffect(() => {
         fetchProjects(pageNumber, segmentId, platformId, languageId);
     }, [pageNumber, segmentId, platformId, languageId]);
@@ -66,7 +66,7 @@ const DropDown: React.FC<DropdownProps> = ({ buttonLabel, ariaLabel, dropdownIte
             </NavbarItem>
             <DropdownMenu
                 aria-label={ariaLabel}
-                className="w-[280px] bg-[#0C111C] rounded-xl p-1 shadow-lg"
+                className="w-[280px] bg-[#0C111C] rounded-xl p-1 shadow-lg list-none"
                 itemClasses={{
                     base: 'gap-4',
                 }}
