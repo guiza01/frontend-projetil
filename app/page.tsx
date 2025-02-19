@@ -5,6 +5,7 @@ import { FaArrowLeft, FaArrowRight, FaBars, FaTimes } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { projectService } from "@/services/projectService";
+import Link from "next/link";
 
 interface Project {
   id: number;
@@ -27,7 +28,7 @@ export default function Home() {
   const pageSize = 6;
 
   useEffect(() => {
-    if (selectedLink === "Projetos") {
+    if (selectedLink === "Tudo") {
       fetchProjects();
     }
   }, [selectedLink, currentPage]);
@@ -76,24 +77,31 @@ export default function Home() {
             <div className="text-center">
               <a
                 href="#"
-                className={`block text-[#EBEFF8] ${selectedLink === "Projetos" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                onClick={() => setSelectedLink("Projetos")}
+                className={`block text-[#EBEFF8] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+                onClick={() => setSelectedLink("Tudo")}
               >
-                Projetos
+                Tudo
               </a>
               <a
                 href="#"
-                className={`block text-[#EBEFF8] ${selectedLink === "Outra aba 1" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                onClick={() => setSelectedLink("Outra aba 1")}
+                className={`block text-[#EBEFF8] ${selectedLink === "Segmento" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+                onClick={() => setSelectedLink("Segmento")}
               >
-                Outra aba
+                Segmento de negócio
               </a>
               <a
                 href="#"
-                className={`block text-[#EBEFF8] ${selectedLink === "Outra aba 2" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                onClick={() => setSelectedLink("Outra aba 2")}
+                className={`block text-[#EBEFF8] ${selectedLink === "Tecnologia" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+                onClick={() => setSelectedLink("Tecnologia")}
               >
-                Outra aba
+                Tecnologia
+              </a>
+              <a
+                href="#"
+                className={`block text-[#EBEFF8] ${selectedLink === "Plataforma" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+                onClick={() => setSelectedLink("Plataforma")}
+              >
+                Plataforma
               </a>
             </div>
           </div>
@@ -102,29 +110,36 @@ export default function Home() {
         <div className="flex items-center ml-16 text-[24px] flex-wrap hidden lg:flex">
           <a
             href="#"
-            className={`mr-4 text-[#EBEFF8] ${selectedLink === "Projetos" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-            onClick={() => setSelectedLink("Projetos")}
+            className={`mr-4 text-[#EBEFF8] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+            onClick={() => setSelectedLink("Tudo")}
           >
-            Projetos
+            Tudo
           </a>
           <a
             href="#"
-            className={`mr-4 text-[#EBEFF8] ${selectedLink === "Outra aba 1" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-            onClick={() => setSelectedLink("Outra aba 1")}
+            className={`mr-4 text-[#EBEFF8] ${selectedLink === "Segmento" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+            onClick={() => setSelectedLink("Segmento")}
           >
-            Outra aba
+            Segmento de negócio
           </a>
           <a
             href="#"
-            className={`mr-4 text-[#EBEFF8] ${selectedLink === "Outra aba 2" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-            onClick={() => setSelectedLink("Outra aba 2")}
+            className={`mr-4 text-[#EBEFF8] ${selectedLink === "Tecnologia" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+            onClick={() => setSelectedLink("Tecnologia")}
           >
-            Outra aba
+            Tecnologia
+          </a>
+          <a
+            href="#"
+            className={`mr-4 text-[#EBEFF8] ${selectedLink === "Plataforma" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+            onClick={() => setSelectedLink("Plataforma")}
+          >
+            Plataforma
           </a>
         </div>
       </nav>
 
-      {selectedLink === "Projetos" && (
+      {selectedLink === "Tudo" && (
         <div className="container mt-8 text-white">
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-center bg-banner p-4 rounded-xl mt-[2rem] h-auto md:h-[228px]">
             <img src="/logoBranca.png" className="w-[100px] md:w-[140px] lg:w-[180px] h-auto" />
@@ -160,9 +175,10 @@ export default function Home() {
                   </h2>
                   <Button
                     className="mt-4 bg-[#172250] text-white hover:bg-[#374dc5] flex items-center justify-center hidden lg:block"
-                    onClick={() => window.open(project.link)}
                   >
-                    <ArrowRight className="text-[#4761FF]" />
+                    <Link href={`/Details/${project.id}`}>
+                      <ArrowRight className="text-[#4761FF]" />
+                    </Link>
                   </Button>
                 </div>
                 <p className="text-[#EBEFF8] mt-2 line-clamp-2">
@@ -176,13 +192,13 @@ export default function Home() {
                   ))}
                 </div>
 
-                {/* Botão "Ver detalhes" somente na versão mobile */}
                 <div className="lg:hidden mt-4 w-full">
                   <Button
                     className="w-full bg-[#3C52EF] text-[#EBEFF8] hover:bg-[#3145D0]"
-                    onClick={() => window.open(project.link)}
                   >
-                    Ver detalhes
+                    <Link href={`/Details/${project.id}`}>
+                      Ver detalhes
+                    </Link>
                   </Button>
                 </div>
               </div>

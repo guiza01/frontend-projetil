@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: Chakra Petch, Inter, Arial, Helvetica, sans-serif;
+  font-family: "Chakra Petch", Inter, Arial;
 }
 
 @layer base {
