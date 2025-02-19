@@ -8,13 +8,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Carousel from "@/components/Carousel";
-
-interface Image {
-    id: number;
-    urlImage: string;
-    projectId: number;
-    isCover: boolean;
-}
+import { ImageInterface } from "@/components/ImageInterface";
+import NavBarDefault from "@/components/NavBarDefault";
 
 interface Project {
     id: number;
@@ -27,13 +22,13 @@ interface Project {
     segments: { id: number; name: string }[] | string[];
     platforms: { id: number; name: string }[] | string[];
     languages: { id: number; name: string }[] | string[];
-    images: Image[];
+    images: ImageInterface[];
 }
 
 
 export default function DetailsPage() {
     const { id } = useParams();
-    const [selectedLink, setSelectedLink] = useState("");
+    const [selectedLink, setSelectedLink] = useState("Tudo2");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [project, setProject] = useState<Project>();
     const [loading, setLoading] = useState<boolean>(true);
@@ -102,47 +97,20 @@ export default function DetailsPage() {
                 </div>
 
                 {isMenuOpen && (
-                    <div className="md:hidden fixed top-0 left-0 w-full h-full bg-[#141924] bg-opacity-80 flex flex-col items-center justify-center z-10">
+                    <div className="lg:hidden fixed top-0 left-0 w-full h-full bg-[#141924] bg-opacity-95 flex flex-col items-center z-10">
                         <button
                             onClick={() => setIsMenuOpen(false)}
                             className="absolute top-4 right-4 text-white z-20"
                         >
                             <FaTimes size={24} />
                         </button>
-                        <div className="text-center">
-                            <a
-                                href="#"
-                                className={`block text-[#EBEFF8] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                                onClick={() => setSelectedLink("Tudo")}
-                            >
-                                Tudo
-                            </a>
-                            <a
-                                href="#"
-                                className={`block text-[#EBEFF8] ${selectedLink === "Segmento" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                                onClick={() => setSelectedLink("Segmento")}
-                            >
-                                Segmento de negócio
-                            </a>
-                            <a
-                                href="#"
-                                className={`block text-[#EBEFF8] ${selectedLink === "Tecnologia" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                                onClick={() => setSelectedLink("Tecnologia")}
-                            >
-                                Tecnologia
-                            </a>
-                            <a
-                                href="#"
-                                className={`block text-[#EBEFF8] ${selectedLink === "Plataforma" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                                onClick={() => setSelectedLink("Plataforma")}
-                            >
-                                Plataforma
-                            </a>
+                        <div className="text-center mt-10">
+                            <NavBarDefault />
                         </div>
                     </div>
                 )}
 
-                <div className="flex items-center ml-16 text-[24px] flex-wrap hidden lg:flex">
+                <div className="flex items-center ml-16 text-[24px] hidden lg:flex">
                     <a
                         href="#"
                         className={`mr-4 text-[#EBEFF8] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
@@ -150,27 +118,7 @@ export default function DetailsPage() {
                     >
                         Tudo
                     </a>
-                    <a
-                        href="#"
-                        className={`mr-4 text-[#EBEFF8] ${selectedLink === "Segmento" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                        onClick={() => setSelectedLink("Segmento")}
-                    >
-                        Segmento de negócio
-                    </a>
-                    <a
-                        href="#"
-                        className={`mr-4 text-[#EBEFF8] ${selectedLink === "Tecnologia" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                        onClick={() => setSelectedLink("Tecnologia")}
-                    >
-                        Tecnologia
-                    </a>
-                    <a
-                        href="#"
-                        className={`mr-4 text-[#EBEFF8] ${selectedLink === "Plataforma" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                        onClick={() => setSelectedLink("Plataforma")}
-                    >
-                        Plataforma
-                    </a>
+                    <NavBarDefault />
                 </div>
             </nav>
 
