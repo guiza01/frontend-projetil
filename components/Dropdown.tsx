@@ -66,7 +66,7 @@ const DropDown: React.FC<DropdownProps> = ({ buttonLabel, ariaLabel, dropdownIte
             </NavbarItem>
             <DropdownMenu
                 aria-label={ariaLabel}
-                className="w-[280px] bg-white rounded-xl p-1 shadow-lg"
+                className="w-[280px] bg-[#0C111C] rounded-xl p-1 shadow-lg"
                 itemClasses={{
                     base: 'gap-4',
                 }}
@@ -74,10 +74,10 @@ const DropDown: React.FC<DropdownProps> = ({ buttonLabel, ariaLabel, dropdownIte
                 {dropdownItems.map((item) => (
                     <DropdownItem
                         key={item.id}
-                        className="text-center hover:bg-gray-300 border-b border-[#646466] border-opacity-40 p-2 rounded-none"
+                        className="text-start hover:bg-[#222A3B] p-2 rounded"
                         onPress={() => handleSelect(item.id)}
                     >
-                        <span className="text-[16px] text-[#646466]">
+                        <span className="text-[16px] text-[#AAB4CB]">
                             {item.name}
                         </span>
                     </DropdownItem>
