@@ -1,25 +1,22 @@
 'use client'
 
-import {
-    Navbar,
-    NavbarContent,
-} from "@nextui-org/navbar";
-import React, { useEffect, useState } from "react";
-
-import DropDown from "./Dropdown";
+import { useState, useEffect } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { projectService } from "@/services/projectService";
+import { Navbar, NavbarContent } from "@nextui-org/navbar";
+import DropDown from "./Dropdown";
 
 export default function NavBarDefault() {
-
     const [segments, setSegments] = useState<{ id: number; name: string }[]>([]);
     const [technologies, setTechnologies] = useState<{ id: number; name: string }[]>([]);
     const [platforms, setPlatforms] = useState<{ id: number; name: string }[]>([]);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [selectedLink, setSelectedLink] = useState("Tudo");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const categories = await projectService.getMenuCategories();
-
                 setSegments(categories["Segmentos de Negócio"] || []);
                 setTechnologies(categories["Tecnologia"] || []);
                 setPlatforms(categories["Plataforma"] || []);
@@ -31,46 +28,28 @@ export default function NavBarDefault() {
         fetchData();
     }, []);
 
-    const [isMenuOpen] = useState(true);
-    const [selectedLink, setSelectedLink] = useState("Tudo");
-
-
     return (
         <>
-            <Navbar className="static bg-[#141924] text-[#EBEFF8]" isBlurred={false} maxWidth="xl">
+            <Navbar className="bg-[#141924] text-[#EBEFF8]" isBlurred={false} maxWidth="xl">
+                <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden p-2 text-[#EBEFF8]">
+                    {isMenuOpen ? <FaTimes size={24} className="text-[#8B8D98]" /> : <FaBars size={24} className="text-[#8B8D98]" />}
+                </button>
+
                 {isMenuOpen && (
-                    <div className="lg:hidden fixed top-0 left-0 w-full h-full bg-[#141924] bg-opacity-95 flex flex-col items-center z-10">
-                        <div className="text-center mt-10">
-                            <a
-                                href="#"
-                                className={`block text-[#EBEFF8] text-[24px] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                                onClick={() => setSelectedLink("Tudo")}
-                            >
-                                Tudo
-                            </a>
-                            <DropDown
-                                ariaLabel="Negócio"
-                                buttonLabel="Segmento de negócio"
-                                type="Segment"
-                                dropdownItems={segments}
-                            />
-
-                            <DropDown
-                                ariaLabel="Techs"
-                                buttonLabel="Tecnologia"
-                                type="Language"
-                                dropdownItems={technologies}
-                            />
-
-                            <DropDown
-                                ariaLabel="Plataforma"
-                                buttonLabel="Plataforma"
-                                type="Platform"
-                                dropdownItems={platforms}
-                            />
-                        </div>
+                    <div className="absolute top-full left-[-32] w-screen min-h-screen bg-[#141924] flex flex-col z-50 items-start p-10">
+                        <a
+                            href="#"
+                            className={`block text-[#EBEFF8] text-[24px] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+                            onClick={() => setSelectedLink("Tudo")}
+                        >
+                            Tudo
+                        </a>
+                        <DropDown ariaLabel="Negócio" buttonLabel="Segmento de negócio" type="Segment" dropdownItems={segments} />
+                        <DropDown ariaLabel="Techs" buttonLabel="Tecnologia" type="Language" dropdownItems={technologies} />
+                        <DropDown ariaLabel="Plataforma" buttonLabel="Plataforma" type="Platform" dropdownItems={platforms} />
                     </div>
                 )}
+
                 <NavbarContent className="hidden sm:flex gap-4" justify="start">
                     <DropDown ariaLabel="Negócio" buttonLabel="Segmento de negócio" type="Segment" dropdownItems={segments} />
                     <DropDown ariaLabel="Techs" buttonLabel="Tecnologia" type="Language" dropdownItems={technologies} />

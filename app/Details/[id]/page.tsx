@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
 import { projectService } from "@/services/projectService";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -28,17 +27,8 @@ interface Project {
 
 export default function DetailsPage() {
     const { id } = useParams();
-    const [selectedLink, setSelectedLink] = useState("Tudo2");
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [project, setProject] = useState<Project>();
     const [loading, setLoading] = useState<boolean>(true);
-
-    const normalizeArray = (data: string[]) => {
-        if (data.length > 0 && typeof data[0] === "string") {
-            return data.map((name, index) => ({ id: index, name }));
-        }
-        return data;
-    };
 
     useEffect(() => {
         const fetchProject = async () => {
@@ -46,15 +36,12 @@ export default function DetailsPage() {
 
             try {
                 const data = await projectService.getProjectById(Number(id));
-
-                const normalizedProject: Project = {
+                setProject({
                     ...data,
-                    segments: normalizeArray(data.segments),
-                    platforms: normalizeArray(data.platforms),
-                    languages: normalizeArray(data.languages),
-                };
-
-                setProject(normalizedProject);
+                    segments: data.segments || [],
+                    platforms: data.platforms || [],
+                    languages: data.languages || [],
+                });
             } catch (error) {
                 console.error("Erro ao buscar projeto:", error);
             } finally {
@@ -84,44 +71,12 @@ export default function DetailsPage() {
     return (
         <div className="items-center bg-[#0C111C] justify-items-center p-4 min-h-screen">
             <nav className="container border-b border-[#222A3B] m-auto bg-[#141924] flex p-4 items-center relative">
-                <button
-                    onClick={() => setIsMenuOpen(true)}
-                    className="lg:hidden text-[#586175] p-2"
-                >
-                    <FaBars size={24} />
-                </button>
-
-                <div className="flex items-center w-full ml-[3rem] lg:w-auto lg:justify-between justify-start">
-                    <img src="/logoProjetil.png" className="mr-4 h-[28] w-[42] md:h-[39.84px] md:w-[59.77px]" />
+                <NavBarDefault />
+                <div className="flex items-center w-full ml-[3rem] lg:w-auto lg:justify-between">
+                    <img src="/logoProjetil.png" className="mr-4 h-[28px] w-[42px] md:h-[39.84px] md:w-[59.77px]" />
                     <h1 className="font-inter font-semibold text-[#EBEFF8] text-[24px] md:text-[28.46px]">Projétil</h1>
                 </div>
-
-                {isMenuOpen && (
-                    <div className="lg:hidden fixed top-0 left-0 w-full h-full bg-[#141924] bg-opacity-95 flex flex-col items-center z-10">
-                        <button
-                            onClick={() => setIsMenuOpen(false)}
-                            className="absolute top-4 right-4 text-white z-20"
-                        >
-                            <FaTimes size={24} />
-                        </button>
-                        <div className="text-center mt-10">
-                            <NavBarDefault />
-                        </div>
-                    </div>
-                )}
-
-                <div className="flex items-center ml-16 text-[24px] hidden lg:flex">
-                    <a
-                        href="#"
-                        className={`mr-4 text-[#EBEFF8] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                        onClick={() => setSelectedLink("Tudo")}
-                    >
-                        Tudo
-                    </a>
-                    <NavBarDefault />
-                </div>
             </nav>
-
             <div className="container ml-4 sm:ml-8 md:ml-16 lg:ml-32 flex items-center gap-4 mt-4 justify-start w-full">
                 <Button className="bg-[#172250] text-white hover:bg-[#374dc5] rounded-xl flex items-center justify-center w-[50px] sm:w-[60px] md:w-[70px] h-[44px] sm:h-[50px] md:h-[54px]">
                     <Link href={`/`}>

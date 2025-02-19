@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import { FaArrowLeft, FaArrowRight, FaBars, FaTimes } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { projectService } from "@/services/projectService";
@@ -25,7 +25,6 @@ export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pageSize = 6;
 
   useEffect(() => {
@@ -33,9 +32,10 @@ export default function Home() {
       fetchProjects();
     }
   }, [selectedLink, currentPage]);
-
+  
   const fetchProjects = async () => {
     try {
+      console.log("entrou aqui")
       const response = await projectService.getAllProjects(currentPage, pageSize);
 
       const formattedProjects: Project[] = response.items.map((project) => ({
@@ -55,33 +55,16 @@ export default function Home() {
   return (
     <div className="items-center bg-[#0C111C] justify-items-center p-4 min-h-screen">
       <nav className="container border-b border-[#222A3B] m-auto bg-[#141924] flex p-4 items-center relative">
-        <button
-          onClick={() => setIsMenuOpen(true)}
-          className="lg:hidden text-[#586175] p-2"
-        >
-          <FaBars size={24} />
-        </button>
+        <div className="block lg:hidden">
+          <NavBarDefault />
+        </div>
 
         <div className="flex items-center w-full ml-[3rem] lg:w-auto lg:justify-between justify-start">
-          <img src="/logoProjetil.png" className="mr-4 h-[28] w-[42] md:h-[39.84px] md:w-[59.77px]" />
+          <img src="/logoProjetil.png" className="mr-4 h-[28px] w-[42px] md:h-[39.84px] md:w-[59.77px]" />
           <h1 className="font-inter font-semibold text-[#EBEFF8] text-[24px] md:text-[28.46px]">Projétil</h1>
         </div>
 
-        {isMenuOpen && (
-          <div className="lg:hidden fixed top-0 left-0 w-full h-full bg-[#141924] bg-opacity-95 flex flex-col items-center z-10">
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="absolute top-4 right-4 text-white z-20"
-            >
-              <FaTimes size={24} />
-            </button>
-            <div className="text-center mt-10">
-              <NavBarDefault />
-            </div>
-          </div>
-        )}
-
-        <div className="flex items-center ml-16 text-[24px] hidden lg:flex">
+        <div className="hidden lg:flex items-center ml-16 text-[24px]">
           <a
             href="#"
             className={`mr-4 text-[#EBEFF8] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
@@ -111,7 +94,7 @@ export default function Home() {
                 placeholder="O que você procura?"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full md:w-auto pl-10 bg-[#222A3B] text-[#AAB4CB] p-2 rounded"
+                className="w-full relative md:w-auto pl-10 bg-[#222A3B] text-[#AAB4CB] p-2 rounded"
               />
             </div>
           </div>
