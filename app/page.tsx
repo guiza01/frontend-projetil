@@ -27,6 +27,8 @@ export default function Home() {
   const [totalPages, setTotalPages] = useState(0);
   const pageSize = 6;
 
+  const [hoveredId, setHoveredId] = useState<number | null>();
+
   useEffect(() => {
     if (selectedLink === "Tudo") {
       fetchProjects();
@@ -53,7 +55,7 @@ export default function Home() {
   };
 
   return (
-    <div className="items-center bg-[#0C111C] justify-items-center mb-16 min-h-screen">
+    <div className="items-center bg-[#0C111C] justify-items-center min-h-screen">
       <nav className="w-full border-b border-[#222A3B] bg-[#141924]">
         <div className="container mx-auto flex p-4 items-center relative">
           <div className="block lg:hidden">
@@ -98,39 +100,52 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             {projects.map((project) => (
-              <div key={project.id} className="bg-[#141824] p-4 rounded-lg shadow-lg">
-                <img
-                  src={project.images?.find(img => img.isCover)?.urlImage || "/placeholder.jpg"}
-                  alt={project.title}
-                  className="w-full h-60 object-cover rounded-lg"
-                />
+              <div
+                key={project.id}
+                className="bg-[#141824] hover:border hover:border-[#4761FF] p-4 rounded-xl shadow-lg transition-all duration-300"
+                onMouseEnter={() => setHoveredId(project.id)}
+                onMouseLeave={() => setHoveredId(null)}
+              >
+                <div className="relative w-full h-60 rounded-lg overflow-hidden">
+                  <img
+                    src={project.images?.find(img => img.isCover)?.urlImage || "/placeholder.jpg"}
+                    alt={project.title}
+                    className="w-full h-full object-cover rounded-lg transition-opacity duration-300"
+                    style={{ opacity: hoveredId === project.id ? 0.2 : 1 }}
+                  />
+                  {hoveredId === project.id && (
+                    <div className="absolute inset-0 flex items-center justify-center text-white text-lg font-bold p-4 text-center">
+                      {project.description}
+                    </div>
+                  )}
+                </div>
+
                 <div className="flex justify-between">
                   <h2 className="text-[20px] md:text-[24px] text-[#EBEFF8] font-bold mt-4">
                     {project.title}
                   </h2>
-                  <Button
-                    className="mt-4 bg-[#172250] text-[#EBEFF8] hover:bg-[#374dc5] flex items-center justify-center hidden lg:block"
-                  >
+                  <button className="mt-4 bg-[#172250] text-[#EBEFF8] hover:border-[#EBEFF8] flex items-center justify-center hidden lg:block max-h-[40px] rounded-md px-3 py-2 transition-all">
                     <Link href={`/Details/${project.id}`}>
                       <ArrowRight className="text-[#4761FF]" />
                     </Link>
-                  </Button>
+                  </button>
                 </div>
-                <p className="text-[#EBEFF8] mt-2 line-clamp-2">
-                  {project.description}
-                </p>
+
+                <p className="text-[#EBEFF8] mt-2 line-clamp-2">{project.description}</p>
+
                 <div className="flex gap-2 mt-4 flex-wrap">
                   {project.languages.map((language) => (
-                    <div key={language.id} className="text-[#EBEFF8] border border-[#222A3B] rounded-md px-3 py-2">
+                    <div
+                      key={language.id}
+                      className={`text-[#EBEFF8] border border-[#222A3B] rounded-md px-3 py-2 transition-all ${hoveredId === project.id ? 'hover:bg-[#586175]' : ''}`}
+                    >
                       {language.name}
                     </div>
                   ))}
                 </div>
 
                 <div className="lg:hidden mt-4 w-full">
-                  <Button
-                    className="w-full bg-[#3C52EF] text-[#EBEFF8] hover:bg-[#3145D0]"
-                  >
+                  <Button className="w-full bg-[#3C52EF] text-[#EBEFF8] hover:bg-[#3145D0]">
                     <Link href={`/Details/${project.id}`}>
                       Ver detalhes
                     </Link>
@@ -138,8 +153,8 @@ export default function Home() {
                 </div>
               </div>
             ))}
-
           </div>
+
           <div className="container flex flex-wrap justify-between mt-4 bg-[#141824] items-center">
             <Button
               variant="outline"
@@ -162,7 +177,8 @@ export default function Home() {
             </Button>
           </div>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }

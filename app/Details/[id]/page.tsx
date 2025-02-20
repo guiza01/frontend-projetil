@@ -9,6 +9,7 @@ import { ArrowLeft } from "lucide-react";
 import Carousel from "@/components/Carousel";
 import { ImageInterface } from "@/components/ImageInterface";
 import NavBarDefault from "@/components/NavBarDefault";
+import { useRouter } from "next/navigation";
 
 interface Project {
     id: number;
@@ -29,6 +30,7 @@ export default function DetailsPage() {
     const { id } = useParams();
     const [project, setProject] = useState<Project>();
     const [loading, setLoading] = useState<boolean>(true);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchProject = async () => {
@@ -90,10 +92,11 @@ export default function DetailsPage() {
                 </div>
             </nav>
             <div className="container sm:ml-8 md:ml-16 lg:ml-32 flex items-center gap-4 mt-4 justify-start w-full">
-                <Button className="bg-[#172250] ml-4 text-white hover:bg-[#374dc5] rounded-xl flex items-center justify-center w-[50px] sm:w-[60px] md:w-[70px] h-[44px] sm:h-[50px] md:h-[54px]">
-                    <Link href={`/`}>
-                        <ArrowLeft className="text-[#4761FF]" />
-                    </Link>
+                <Button
+                    onClick={() => router.push("/")}
+                    className="bg-[#172250] ml-4 text-white hover:bg-[#374dc5] rounded-xl flex items-center justify-center w-[50px] sm:w-[60px] md:w-[70px] h-[44px] sm:h-[50px] md:h-[54px]"
+                >
+                    <ArrowLeft className="text-[#4761FF]" />
                 </Button>
                 <h1 className="text-[#EBEFF8] text-[18px] sm:text-[20px] md:text-[24px] font-inter">Voltar</h1>
             </div>
