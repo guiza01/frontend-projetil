@@ -78,7 +78,7 @@ export default function Home() {
         <div className="container mt-8 text-[#EBEFF8]">
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-center bg-banner mr-4 ml-4 p-4 rounded-xl mt-[2rem] h-auto md:h-[164px]">
             <img src="/logoBranca.png" className="w-[100px] md:w-[100px] lg:w-[122px] h-auto" />
-            <h1 className="text-[20px] md:text-[32px] lg:text-[40px] md:text-left">
+            <h1 className="text-[20px] md:text-[32px] lg:text-[32px] md:text-left">
               Nosso propósito é impulsionar o seu projeto
             </h1>
           </div>
