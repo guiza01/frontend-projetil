@@ -45,6 +45,7 @@ export default function Home() {
       }));
 
       setTotalPages(Math.ceil(response.totalItems / pageSize));
+      setSelectedLink("Tudo");
       setProjects(formattedProjects);
     } catch (error) {
       console.error("Erro ao carregar projetos:", error);
