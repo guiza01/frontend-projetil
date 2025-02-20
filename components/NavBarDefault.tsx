@@ -36,7 +36,7 @@ export default function NavBarDefault() {
                 </button>
 
                 {isMenuOpen && (
-                    <div className="absolute top-full left-[-32] w-screen min-h-screen bg-[#141924] flex flex-col z-50 items-start p-10">
+                    <div className="absolute top-full left-[-64px] w-screen min-h-screen bg-[#141924] flex flex-col z-40 p-10 items-start">
                         <a
                             href="#"
                             className={`block text-[#EBEFF8] text-[24px] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}

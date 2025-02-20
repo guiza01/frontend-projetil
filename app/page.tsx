@@ -32,10 +32,9 @@ export default function Home() {
       fetchProjects();
     }
   }, [selectedLink, currentPage]);
-  
+
   const fetchProjects = async () => {
     try {
-      console.log("entrou aqui")
       const response = await projectService.getAllProjects(currentPage, pageSize);
 
       const formattedProjects: Project[] = response.items.map((project) => ({
