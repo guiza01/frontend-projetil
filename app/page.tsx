@@ -137,7 +137,7 @@ export default function Home() {
                   {project.languages.map((language) => (
                     <div
                       key={language.id}
-                      className={`text-[#EBEFF8] border border-[#222A3B] rounded-md px-3 py-2 transition-all ${hoveredId === project.id ? 'hover:bg-[#586175]' : ''}`}
+                      className={`text-[#EBEFF8] border border-[#222A3B] rounded-md px-3 py-2 transition-all ${hoveredId === project.id ? 'bg-[#586175]' : ''}`}
                     >
                       {language.name}
                     </div>
