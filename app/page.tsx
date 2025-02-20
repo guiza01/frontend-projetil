@@ -76,8 +76,8 @@ export default function Home() {
 
       {selectedLink === "Tudo" && (
         <div className="container mt-8 text-[#EBEFF8]">
-          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center bg-banner mr-4 ml-4 p-4 rounded-xl mt-[2rem] h-auto md:h-[228px]">
-            <img src="/logoBranca.png" className="w-[100px] md:w-[140px] lg:w-[180px] h-auto" />
+          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center bg-banner mr-4 ml-4 p-4 rounded-xl mt-[2rem] h-auto md:h-[164px]">
+            <img src="/logoBranca.png" className="w-[100px] md:w-[100px] lg:w-[122px] h-auto" />
             <h1 className="text-[20px] md:text-[32px] lg:text-[40px] md:text-left">
               Nosso propósito é impulsionar o seu projeto
             </h1>
