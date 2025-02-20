@@ -36,10 +36,10 @@ export default function NavBarDefault() {
                 </button>
 
                 {isMenuOpen && (
-                    <div className="absolute top-full left-[-32px] w-screen min-h-screen bg-[#141924] flex flex-col z-40 p-10 items-start">
+                    <div className="absolute top-full left-[-18px] w-screen min-h-screen bg-[#141924] flex flex-col z-40 p-8 items-start">
                         <a
                             href="#"
-                            className={`block text-[#EBEFF8] text-[24px] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+                            className={`block text-[#EBEFF8] text-[18px] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
                             onClick={() => setSelectedLink("Tudo")}
                         >
                             Tudo
@@ -51,6 +51,13 @@ export default function NavBarDefault() {
                 )}
 
                 <NavbarContent className="hidden sm:flex gap-4" justify="start">
+                    <a
+                        href="#"
+                        className={`block text-[#EBEFF8] text-[18px] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
+                        onClick={() => setSelectedLink("Tudo")}
+                    >
+                        Tudo
+                    </a>
                     <DropDown ariaLabel="Negócio" buttonLabel="Segmento de negócio" type="Segment" dropdownItems={segments} />
                     <DropDown ariaLabel="Techs" buttonLabel="Tecnologia" type="Language" dropdownItems={technologies} />
                     <DropDown ariaLabel="Plataforma" buttonLabel="Plataforma" type="Platform" dropdownItems={platforms} />

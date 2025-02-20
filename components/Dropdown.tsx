@@ -56,7 +56,7 @@ const DropDown: React.FC<DropdownProps> = ({ buttonLabel, ariaLabel, dropdownIte
                 <DropdownTrigger>
                     <Button
                         disableRipple
-                        className="p-0 text-[24px] bg-transparent data-[hover=true]:bg-transparent"
+                        className="p-0 text-[18px] bg-transparent data-[hover=true]:bg-transparent"
                         radius="sm"
                         variant="light"
                     >

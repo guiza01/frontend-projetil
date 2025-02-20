@@ -52,51 +52,49 @@ export default function Home() {
   };
 
   return (
-    <div className="items-center bg-[#0C111C] justify-items-center p-4 min-h-screen">
-      <nav className="container border-b border-[#222A3B] m-auto bg-[#141924] flex p-4 items-center relative">
-        <div className="block lg:hidden">
-          <NavBarDefault />
-        </div>
-
-        <div className="flex items-center w-full ml-[3rem] lg:w-auto lg:justify-between justify-start">
-          <img src="/logoProjetil.png" className="mr-4 h-[28px] w-[42px] md:h-[39.84px] md:w-[59.77px]" />
-          <h1 className="font-inter font-semibold text-[#EBEFF8] text-[24px] md:text-[28.46px]">Projétil</h1>
-        </div>
-
-        <div className="hidden lg:flex items-center ml-16 text-[24px]">
-          <a
-            href="#"
-            className={`mr-4 text-[#EBEFF8] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-            onClick={() => setSelectedLink("Tudo")}
-          >
-            Tudo
-          </a>
-          <NavBarDefault />
+    <div className="items-center bg-[#0C111C] justify-items-center mb-16 min-h-screen">
+      <nav className="w-full border-b border-[#222A3B] bg-[#141924]">
+        <div className="container mx-auto flex p-4 items-center relative">
+          <div className="block lg:hidden">
+            <NavBarDefault />
+          </div>
+          <div className="flex items-center w-full ml-4 lg:w-auto lg:justify-between justify-start">
+            <img
+              src="/logoProjetil.png"
+              className="mr-4 h-[28px] w-[42px] md:h-[39.84px] md:w-[59.77px]"
+            />
+            <h1 className="font-inter font-semibold text-[#EBEFF8] text-[24px] md:text-[28.46px]">
+              Projétil
+            </h1>
+          </div>
+          <div className="hidden lg:flex items-center ml-16 text-[18px]">
+            <NavBarDefault />
+          </div>
         </div>
       </nav>
 
       {selectedLink === "Tudo" && (
-        <div className="container mt-8 text-white">
-          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center bg-banner p-4 rounded-xl mt-[2rem] h-auto md:h-[228px]">
+        <div className="container mt-8 text-[#EBEFF8]">
+          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center bg-banner mr-4 ml-4 p-4 rounded-xl mt-[2rem] h-auto md:h-[228px]">
             <img src="/logoBranca.png" className="w-[100px] md:w-[140px] lg:w-[180px] h-auto" />
-            <h1 className="text-[20px] md:text-[32px] lg:text-[56px] md:text-left">
+            <h1 className="text-[20px] md:text-[32px] lg:text-[40px] md:text-left">
               Nosso propósito é impulsionar o seu projeto
             </h1>
           </div>
 
-          <div className="flex flex-wrap justify-between mt-4 w-full">
-            <h1 className="text-[28px] md:text-[32px] font-chakra">Projetos</h1>
-            <div className="relative text-black flex items-center gap-2 w-full md:w-auto mt-2 md:mt-0">
-              <FiSearch className="absolute left-2 text-[#586175]" />
+          <div className="flex flex-wrap justify-center mt-8 w-full">
+            <div className="relative w-full md:w-auto ml-4 mr-4 md:mt-0">
+              <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#586175] text-lg" />
               <input
                 type="text"
                 placeholder="O que você procura?"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full relative md:w-auto pl-10 bg-[#222A3B] text-[#AAB4CB] p-2 rounded"
+                className="w-full md:w-[750px] border border-[#222A3B] pl-10 bg-[#141924] text-[#AAB4CB] p-2 rounded-xl"
               />
             </div>
           </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             {projects.map((project) => (
               <div key={project.id} className="bg-[#141824] p-4 rounded-lg shadow-lg">
@@ -110,7 +108,7 @@ export default function Home() {
                     {project.title}
                   </h2>
                   <Button
-                    className="mt-4 bg-[#172250] text-white hover:bg-[#374dc5] flex items-center justify-center hidden lg:block"
+                    className="mt-4 bg-[#172250] text-[#EBEFF8] hover:bg-[#374dc5] flex items-center justify-center hidden lg:block"
                   >
                     <Link href={`/Details/${project.id}`}>
                       <ArrowRight className="text-[#4761FF]" />
@@ -141,7 +139,7 @@ export default function Home() {
             ))}
 
           </div>
-          <div className="container flex flex-wrap justify-between mt-4 mb-16 bg-[#141824] items-center">
+          <div className="container flex flex-wrap justify-between mt-4 bg-[#141824] items-center">
             <Button
               variant="outline"
               className="flex items-center bg-[#141924] text-[#AAB4CB] hover:bg-[#1f2635]"

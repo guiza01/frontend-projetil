@@ -69,16 +69,28 @@ export default function DetailsPage() {
     }
 
     return (
-        <div className="items-center bg-[#0C111C] justify-items-center p-4 min-h-screen">
-            <nav className="container border-b border-[#222A3B] m-auto bg-[#141924] flex p-4 items-center relative">
-                <NavBarDefault />
-                <div className="flex items-center w-full ml-[3rem] lg:w-auto lg:justify-between">
-                    <img src="/logoProjetil.png" className="mr-4 h-[28px] w-[42px] md:h-[39.84px] md:w-[59.77px]" />
-                    <h1 className="font-inter font-semibold text-[#EBEFF8] text-[24px] md:text-[28.46px]">Projétil</h1>
+        <div className="items-center bg-[#0C111C] justify-items-center mb-16 min-h-screen">
+            <nav className="w-full border-b border-[#222A3B] bg-[#141924]">
+                <div className="container mx-auto flex p-4 items-center relative">
+                    <div className="block lg:hidden">
+                        <NavBarDefault />
+                    </div>
+                    <div className="flex items-center w-full ml-4 lg:w-auto lg:justify-between justify-start">
+                        <img
+                            src="/logoProjetil.png"
+                            className="mr-4 h-[28px] w-[42px] md:h-[39.84px] md:w-[59.77px]"
+                        />
+                        <h1 className="font-inter font-semibold text-[#EBEFF8] text-[24px] md:text-[28.46px]">
+                            Projétil
+                        </h1>
+                    </div>
+                    <div className="hidden lg:flex items-center ml-16 text-[18px]">
+                        <NavBarDefault />
+                    </div>
                 </div>
             </nav>
-            <div className="container ml-4 sm:ml-8 md:ml-16 lg:ml-32 flex items-center gap-4 mt-4 justify-start w-full">
-                <Button className="bg-[#172250] text-white hover:bg-[#374dc5] rounded-xl flex items-center justify-center w-[50px] sm:w-[60px] md:w-[70px] h-[44px] sm:h-[50px] md:h-[54px]">
+            <div className="container sm:ml-8 md:ml-16 lg:ml-32 flex items-center gap-4 mt-4 justify-start w-full">
+                <Button className="bg-[#172250] ml-4 text-white hover:bg-[#374dc5] rounded-xl flex items-center justify-center w-[50px] sm:w-[60px] md:w-[70px] h-[44px] sm:h-[50px] md:h-[54px]">
                     <Link href={`/`}>
                         <ArrowLeft className="text-[#4761FF]" />
                     </Link>
