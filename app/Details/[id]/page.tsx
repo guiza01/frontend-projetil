@@ -91,13 +91,13 @@ export default function DetailsPage() {
                     </div>
                 </div>
             </nav>
-            <div className="container sm:ml-8 md:ml-16 lg:ml-32 flex items-center gap-4 mt-4 justify-start w-full">
-                <Button
+            <div className="container flex items-center gap-4 mt-4 justify-start w-full">
+                <button
                     onClick={() => router.push("/")}
-                    className="bg-[#172250] ml-4 hover:bg-[#172250]  text-white rounded-xl flex items-center justify-center w-[50px] sm:w-[60px] md:w-[70px] h-[44px] sm:h-[50px] md:h-[54px]"
+                    className="bg-[#172250] hover:bg-[#172250] rounded-xl min-w-[70px] min-h-[54px] flex items-center justify-center"
                 >
-                    <ArrowLeft className="text-[#4761FF]" />
-                </Button>
+                    <ArrowLeft className="text-[#4761FF] w-8 h-8" />
+                </button>
                 <h1 className="text-[#EBEFF8] text-[18px] sm:text-[20px] md:text-[24px] font-inter">Voltar</h1>
             </div>
 
