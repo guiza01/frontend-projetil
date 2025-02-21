@@ -94,7 +94,7 @@ export default function DetailsPage() {
             <div className="container flex items-center gap-4 mt-4 justify-start w-full">
                 <button
                     onClick={() => router.push("/")}
-                    className="bg-[#172250] hover:bg-[#172250] rounded-xl min-w-[70px] min-h-[54px] flex items-center justify-center"
+                    className="bg-[#172250] hover:bg-[#172250] rounded-xl min-w-[70px] min-h-[54px] flex items-center justify-center ml-6 sm:ml-0"
                 >
                     <ArrowLeft className="text-[#4761FF] w-8 h-8" />
                 </button>
