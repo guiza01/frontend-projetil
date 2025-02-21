@@ -73,11 +73,11 @@ export default function DetailsPage() {
     return (
         <div className="items-center bg-[#0C111C] justify-items-center min-h-screen">
             <nav className="w-full border-b border-[#222A3B] bg-[#141924]">
-                <div className="container mx-auto flex p-4 items-center relative">
+                <div className="container mx-auto flex py-4 items-center relative">
                     <div className="block lg:hidden">
                         <NavBarDefault />
                     </div>
-                    <div className="flex items-center w-full ml-4 lg:w-auto lg:justify-between justify-start">
+                    <div className="flex items-center w-full lg:w-auto lg:justify-between justify-start">
                         <img
                             src="/logoProjetil.png"
                             className="mr-4 h-[28px] w-[42px] md:h-[39.84px] md:w-[59.77px]"

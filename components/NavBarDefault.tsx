@@ -33,7 +33,7 @@ export default function NavBarDefault() {
 
     return (
         <>
-            <Navbar className="bg-[#141924] text-[#EBEFF8]" isBlurred={false} maxWidth="xl">
+            <Navbar className="bg-[#141924] mr-4 text-[#EBEFF8]" isBlurred={false} maxWidth="xl">
                 <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden p-2 text-[#EBEFF8]">
                     {isMenuOpen ? <FaTimes size={24} className="text-[#8B8D98]" /> : <FaBars size={24} className="text-[#8B8D98]" />}
                 </button>
