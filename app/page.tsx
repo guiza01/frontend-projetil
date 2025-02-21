@@ -144,25 +144,23 @@ export default function Home() {
 
           <div className="py-10">
             <div className="container flex flex-wrap justify-between mt-4 p-4 bg-[#141824] items-center">
-              <Button
-                variant="outline"
-                className="flex items-center bg-[#141924] text-[#AAB4CB] hover:bg-[#1f2635]"
+              <button
+                className="flex items-center bg-[#141924] text-[#AAB4CB] hover:text-[#EBEFF8] disabled:text-[#AAB4CB] p-2"
                 onClick={() => handlePageChange(pageNumber - 1, segmentId, platformId, languageId)}
                 disabled={pageNumber === 1}
               >
-                <FaArrowLeft className="mr-2" />
+                <FaArrowLeft className={`mr-2 ${pageNumber === 1 ? 'text-[#586175]' : 'text-[#4761FF]'}`} />
                 <span className="hidden sm:inline-flex">Anterior</span>
-              </Button>
+              </button>
               <span className="text-[#AAB4CB]">{pageNumber} de {totalPages}</span>
-              <Button
-                variant="outline"
-                className="flex items-center bg-[#141924] text-[#AAB4CB] hover:bg-[#1f2635]"
+              <button
+                className="flex items-center bg-[#141924] text-[#AAB4CB] hover:text-[#EBEFF8] disabled:text-[#AAB4CB] p-2"
                 onClick={() => handlePageChange(pageNumber + 1, segmentId, platformId, languageId)}
                 disabled={pageNumber === totalPages}
               >
                 <span className="hidden sm:inline-flex">Próximo</span>
-                <FaArrowRight className="ml-2" />
-              </Button>
+                <FaArrowRight className={`ml-2 ${pageNumber === totalPages ? 'text-[#586175]' : 'text-[#4761FF]'}`} />
+              </button>
             </div>
           </div>
         </div>
