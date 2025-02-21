@@ -124,11 +124,20 @@ export default function Home() {
                   <h2 className="text-[20px] md:text-[24px] text-[#EBEFF8] font-bold mt-4">
                     {project.title}
                   </h2>
-                  <button className="mt-4 bg-[#172250] text-[#EBEFF8] hover:border-[#EBEFF8] flex items-center justify-center hidden lg:block max-h-[40px] rounded-md px-3 py-2 transition-all">
-                    <Link href={`/Details/${project.id}`}>
-                      <ArrowRight className="text-[#4761FF]" />
+
+                  <div
+                    className={`relative mt-4 max-h-[40px] hidden lg:block rounded-md p-[1px] transition-all ${hoveredId === project.id
+                      ? "bg-gradient-to-r from-[#00C0FF] via-[#4761FF] via-[#860DFF] via-[#C514C8] via-[#FF1A72] via-[#FF6F1E] to-[#FF8900]"
+                      : "bg-transparent"
+                      }`}
+                  >
+                    <Link href={`/Details/${project.id}`} className="w-full h-full">
+                      <button className="flex items-center justify-center w-full h-full bg-[#172250] text-[#EBEFF8] max-h-[40px] rounded-md px-3 py-2 transition-all hover:border-transparent">
+                        <ArrowRight className="text-[#4761FF]" />
+                      </button>
                     </Link>
-                  </button>
+
+                  </div>
                 </div>
 
                 <p className="text-[#EBEFF8] mt-2 line-clamp-2">{project.description}</p>
