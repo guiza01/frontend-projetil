@@ -143,14 +143,16 @@ export default function DetailsPage() {
                 )}
             </div>
 
-            <div className="container p-6 sm:p-8 md:p-12 gap-6 sm:gap-8 md:gap-10 flex flex-col md:flex-row w-full text-[#EBEFF8]">
-                <div className="bg-[#141924] w-full md:w-1/2 p-6 sm:p-8 md:p-10 rounded-xl">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-[#EBEFF8]">Resultados</h2>
-                    <p className="text-gray-300 mt-2">{project.statisticsResults}</p>
-                </div>
-                <div className="bg-[#141924] w-full md:w-1/2 p-6 sm:p-8 md:p-10 rounded-xl">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-[#EBEFF8]">Documentação</h2>
-                    <p className="text-gray-300 mt-2">{project.documentation}</p>
+            <div className="py-10">
+                <div className="container gap-6 sm:gap-8 md:gap-10 flex flex-col md:flex-row w-full text-[#EBEFF8]">
+                    <div className="bg-[#141924] w-full md:w-1/2 p-6 sm:p-8 md:p-10 rounded-xl">
+                        <h2 className="text-xl sm:text-2xl font-semibold text-[#EBEFF8]">Resultados</h2>
+                        <p className="text-gray-300 mt-2">{project.statisticsResults}</p>
+                    </div>
+                    <div className="bg-[#141924] w-full md:w-1/2 p-6 sm:p-8 md:p-10 rounded-xl">
+                        <h2 className="text-xl sm:text-2xl font-semibold text-[#EBEFF8]">Documentação</h2>
+                        <p className="text-gray-300 mt-2">{project.documentation}</p>
+                    </div>
                 </div>
             </div>
 
