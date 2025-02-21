@@ -94,7 +94,7 @@ export default function DetailsPage() {
             <div className="container sm:ml-8 md:ml-16 lg:ml-32 flex items-center gap-4 mt-4 justify-start w-full">
                 <Button
                     onClick={() => router.push("/")}
-                    className="bg-[#172250] ml-4 text-white hover:bg-[#374dc5] rounded-xl flex items-center justify-center w-[50px] sm:w-[60px] md:w-[70px] h-[44px] sm:h-[50px] md:h-[54px]"
+                    className="bg-[#172250] ml-4 hover:bg-[#172250]  text-white rounded-xl flex items-center justify-center w-[50px] sm:w-[60px] md:w-[70px] h-[44px] sm:h-[50px] md:h-[54px]"
                 >
                     <ArrowLeft className="text-[#4761FF]" />
                 </Button>
