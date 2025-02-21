@@ -17,9 +17,9 @@ interface Project {
     technicalDetails: string;
     statisticsResults: string;
     documentation: string;
-    segments: string[];
-    platforms: string[];
-    languages: string[];
+    segments: { id: number; name: string }[];
+    platforms: { id: number; name: string }[];
+    languages: { id: number; name: string }[];
     images: Image[];
 }
 
@@ -71,63 +71,52 @@ export const projectService = {
     async getAllProjects(
         pageNumber: number,
         pageSize: number,
-        segmentId?: number | null,
-        platformId?: number | null,
-        languageId?: number | null
+        segmentId?: number,
+        platformId?: number,
+        languageId?: number
     ): Promise<{ items: Project[], totalItems: number }> {
-        try {
-            const params = new URLSearchParams({
-                PageNumber: pageNumber.toString(),
-                PageSize: pageSize.toString(),
-            });
-    
-            if (segmentId !== null && segmentId !== undefined) {
-                params.append("SegmentId", segmentId.toString());
-            }
-            if (platformId !== null && platformId !== undefined) {
-                params.append("PlatformId", platformId.toString());
-            }
-            if (languageId !== null && languageId !== undefined) {
-                params.append("LanguageId", languageId.toString());
-            }
-    
-            const response = await axios.get(`${baseUrlApi}/Projects/All?PageNumber=${pageNumber}&PageSize=${pageSize}&${params.toString()}`);
-            
-            if (!Array.isArray(response.data.items)) {
-                console.error("Resposta inesperada da API:", response.data);
-                throw new Error("Formato de resposta inválido.");
-            }
-    
-            return {
-                items: response.data.items.map((project: Project) => ({
-                    id: project.id,
-                    title: project.title,
-                    description: project.description,
-                    link: project.link,
-                    technicalDetails: project.technicalDetails,
-                    statisticsResults: project.statisticsResults,
-                    documentation: project.documentation,
-                    languages: project.languages || [],
-                    platforms: project.platforms || [],
-                    segments: project.segments || [],
-                    images: project.images || [],
-                })),
-                totalItems: response.data.totalItems
-            };
-        } catch (error: unknown) {
-            if (axios.isAxiosError(error)) {
-                console.error("Erro ao buscar projetos:", error.response?.data || error.message);
-                throw new Error(error.response?.data?.message || "Erro ao carregar projetos.");
-            }
-            throw new Error("Erro ao carregar projetos.");
+        const token = localStorage.getItem('token');
+
+        const httpHeaders = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        };
+
+        let API_URL = `${baseUrlApi}/Projects/All?PageNumber=${pageNumber}&PageSize=${pageSize}`;
+
+        if (segmentId && segmentId > 0) {
+            API_URL += `&SegmentId=${segmentId}`;
         }
-    },       
+        if (platformId && platformId > 0) {
+            API_URL += `&PlatformId=${platformId}`;
+        }
+        if (languageId && languageId > 0) {
+            API_URL += `&LanguageId=${languageId}`;
+        }
+
+        try {
+            const { data } = await axios.get(API_URL, { headers: httpHeaders });
+
+            const projects: Project[] = data.items.map((project: Project) => ({
+                ...project,
+                images: project.images,
+            }));
+
+            return {
+                items: projects,
+                totalItems: data.totalItems,
+            };
+        } catch (error) {
+            console.error('Failed to fetch projects', error);
+            throw new Error('Failed to fetch projects');
+        }
+    },
 
     async getProjectById(id: number): Promise<Project> {
         try {
             const response = await axios.get(`${baseUrlApi}/Projects/${id}`);
             const project = response.data;
-    
+
             const formattedProject: Project = {
                 id: project.id || null,
                 title: project.title || '',
@@ -141,7 +130,7 @@ export const projectService = {
                 segments: project.segments || [],
                 images: project.images || [],
             };
-    
+
             return formattedProject;
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -151,7 +140,7 @@ export const projectService = {
             }
             throw error;
         }
-    },    
+    },
 
     async addSubcategory(category: string, name: string): Promise<Category> {
         try {

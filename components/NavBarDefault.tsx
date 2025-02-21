@@ -5,13 +5,16 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { projectService } from "@/services/projectService";
 import { Navbar, NavbarContent } from "@nextui-org/navbar";
 import DropDown from "./Dropdown";
+import { useProjectContext } from "@/app/contexts/ProjectContext";
 
 export default function NavBarDefault() {
     const [segments, setSegments] = useState<{ id: number; name: string }[]>([]);
     const [technologies, setTechnologies] = useState<{ id: number; name: string }[]>([]);
     const [platforms, setPlatforms] = useState<{ id: number; name: string }[]>([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [selectedLink, setSelectedLink] = useState("Tudo");
+    const [selectedLink] = useState("Tudo");
+
+    const { handleRemoveFilters } = useProjectContext();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,7 +43,7 @@ export default function NavBarDefault() {
                         <a
                             href="#"
                             className={`block text-[#EBEFF8] text-[18px] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                            onClick={() => setSelectedLink("Tudo")}
+                            onClick={handleRemoveFilters}
                         >
                             Tudo
                         </a>
@@ -54,7 +57,7 @@ export default function NavBarDefault() {
                     <a
                         href="#"
                         className={`block text-[#EBEFF8] text-[18px] ${selectedLink === "Tudo" ? "text-[#4761FF]" : "hover:text-[#4761FF]"}`}
-                        onClick={() => setSelectedLink("Tudo")}
+                        onClick={handleRemoveFilters}
                     >
                         Tudo
                     </a>

@@ -4,55 +4,32 @@ import { FiSearch } from "react-icons/fi";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { projectService } from "@/services/projectService";
 import Link from "next/link";
 import NavBarDefault from "@/components/NavBarDefault";
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  link: string;
-  segments: string[];
-  platforms: string[];
-  languages: { id: number; name: string }[];
-  images?: { urlImage: string; isCover: boolean }[];
-}
+import { useProjectContext } from "./contexts/ProjectContext";
 
 export default function Home() {
-  const [selectedLink, setSelectedLink] = useState("Tudo");
+  const [selectedLink] = useState("Tudo");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const pageSize = 6;
 
   const [hoveredId, setHoveredId] = useState<number | null>();
 
+  const {
+    projects,
+    pageNumber,
+    totalPages,
+    segmentId,
+    platformId,
+    languageId,
+    handlePageChange,
+    fetchProjects
+  } = useProjectContext();
+
   useEffect(() => {
     if (selectedLink === "Tudo") {
-      fetchProjects();
+      fetchProjects(pageNumber, segmentId, platformId, languageId);
     }
-  }, [selectedLink, currentPage]);
-
-  const fetchProjects = async () => {
-    try {
-      const response = await projectService.getAllProjects(currentPage, pageSize);
-
-      const formattedProjects: Project[] = response.items.map((project) => ({
-        ...project,
-        languages: project.languages.map((lang) =>
-          typeof lang === "string" ? { id: 0, name: lang } : lang
-        ),
-      }));
-
-      setTotalPages(Math.ceil(response.totalItems / pageSize));
-      setSelectedLink("Tudo");
-      setProjects(formattedProjects);
-    } catch (error) {
-      console.error("Erro ao carregar projetos:", error);
-    }
-  };
+  }, []);
 
   return (
     <div className="items-center bg-[#0C111C] justify-items-center min-h-screen">
@@ -170,18 +147,18 @@ export default function Home() {
               <Button
                 variant="outline"
                 className="flex items-center bg-[#141924] text-[#AAB4CB] hover:bg-[#1f2635]"
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
+                onClick={() => handlePageChange(pageNumber - 1, segmentId, platformId, languageId)}
+                disabled={pageNumber === 1}
               >
                 <FaArrowLeft className="mr-2" />
                 <span className="hidden sm:inline-flex">Anterior</span>
               </Button>
-              <span className="text-[#AAB4CB]">{currentPage} de {totalPages}</span>
+              <span className="text-[#AAB4CB]">{pageNumber} de {totalPages}</span>
               <Button
                 variant="outline"
                 className="flex items-center bg-[#141924] text-[#AAB4CB] hover:bg-[#1f2635]"
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(pageNumber + 1, segmentId, platformId, languageId)}
+                disabled={pageNumber === totalPages}
               >
                 <span className="hidden sm:inline-flex">Próximo</span>
                 <FaArrowRight className="ml-2" />

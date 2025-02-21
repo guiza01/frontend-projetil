@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { projectService } from "@/services/projectService";
 import { ImageInterface } from "@/components/ImageInterface";
@@ -11,9 +11,9 @@ interface Project {
     technicalDetails: string;
     statisticsResults: string;
     documentation: string;
-    segments: { id: number; name: string }[] | string[];
-    platforms: { id: number; name: string }[] | string[];
-    languages: { id: number; name: string }[] | string[];
+    languages: { id: number; name: string }[];
+    platforms: { id: number; name: string }[];
+    segments: { id: number; name: string }[];
     images: ImageInterface[];
 }
 
@@ -25,9 +25,12 @@ interface ProjectContextType {
     segmentId?: number;
     platformId?: number;
     languageId?: number;
-    handlePageChange: (newPage: number) => void;
+    handlePageChange: (newPage: number, segmentId?: number, platformId?: number, languageId?: number) => void;
     setFilters: (segmentId: number, platformId: number, languageId: number) => void;
     fetchProjects: (pageNumber: number, segmentId?: number, platformId?: number, languageId?: number) => void;
+    setPageNumber: (pageNumber: number) => void;
+    handleChange: (newSegmentId?: number, newPlatformId?: number, newLanguageId?: number) => void;
+    handleRemoveFilters: VoidFunction;
 }
 
 interface ProjectProviderProps {
@@ -46,7 +49,7 @@ export const ProjectProvider = ({ children }: ProjectProviderProps) => {
     const [platformId, setPlatformId] = useState<number>();
     const [languageId, setLanguageId] = useState<number>();
 
-    const itemsPerPage = 5;
+    const itemsPerPage = 6;
 
     const fetchProjects = async (pageNumber: number, segmentId?: number, platformId?: number, languageId?: number) => {
         setLoading(true);
@@ -62,18 +65,31 @@ export const ProjectProvider = ({ children }: ProjectProviderProps) => {
         }
     };
 
+    const handleChange = (newSegmentId?: number, newPlatformId?: number, newLanguageId?: number) => {
+        if (newSegmentId !== undefined) setSegmentId(newSegmentId);
+        if (newPlatformId !== undefined) setPlatformId(newPlatformId);
+        if (newLanguageId !== undefined) setLanguageId(newLanguageId);
+    };
+
     useEffect(() => {
         fetchProjects(pageNumber, segmentId, platformId, languageId)
     }, [pageNumber, segmentId, platformId, languageId]);
 
-    const handlePageChange = (newPage: number) => {
+    const handlePageChange = (newPage: number, segmentId?: number, platformId?: number, languageId?: number) => {
         setPageNumber(newPage);
+        setFilters(segmentId, platformId, languageId);
     };
 
-    const setFilters = (segmentId: number, platformId: number, languageId: number) => {
+    const setFilters = (segmentId?: number, platformId?: number, languageId?: number) => {
         setSegmentId(segmentId);
         setPlatformId(platformId);
         setLanguageId(languageId);
+    };
+
+    const handleRemoveFilters = () => {
+        setSegmentId(undefined);
+        setPlatformId(undefined);
+        setLanguageId(undefined);
     };
 
     return (
@@ -87,7 +103,10 @@ export const ProjectProvider = ({ children }: ProjectProviderProps) => {
             languageId,
             handlePageChange,
             setFilters,
-            fetchProjects
+            fetchProjects,
+            setPageNumber,
+            handleChange,
+            handleRemoveFilters
         }}>
             {children}
         </ProjectContext.Provider>

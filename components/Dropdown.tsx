@@ -9,7 +9,6 @@ import {
     DropdownItem,
 } from "@nextui-org/dropdown";
 import { NavbarItem } from "@nextui-org/navbar";
-import { useEffect, useState } from "react";
 
 interface DropdownItemProps {
     id: number;
@@ -24,31 +23,23 @@ interface DropdownProps {
 }
 
 const DropDown: React.FC<DropdownProps> = ({ buttonLabel, ariaLabel, dropdownItems, type }) => {
-    const { pageNumber, fetchProjects } = useProjectContext();
-
-    const [segmentId, setSegmentId] = useState<number>();
-    const [platformId, setPlatformId] = useState<number>();
-    const [languageId, setLanguageId] = useState<number>();
+    const { handleChange } = useProjectContext();
 
     const handleSelect = (id: number) => {
         switch (type) {
             case "Segment":
-                setSegmentId(id)
+                handleChange(id)
                 break;
             case "Platform":
-                setPlatformId(id)
+                handleChange(undefined, id)
                 break;
             case "Language":
-                setLanguageId(id)
+                handleChange(undefined, undefined, id)
                 break;
             default:
                 break;
         }
     };
-    
-    useEffect(() => {
-        fetchProjects(pageNumber, segmentId, platformId, languageId);
-    }, [pageNumber, segmentId, platformId, languageId]);
 
     return (
         <Dropdown>
