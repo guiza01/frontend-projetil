@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div className="items-center bg-[#0C111C] justify-items-center min-h-screen">
       <nav className="w-full border-b border-[#222A3B] bg-[#141924]">
-        <div className="container mx-auto flex p-4 items-center relative">
+        <div className="container mx-auto flex md:px-0 px-4 py-4 items-center relative">
           <div className="block lg:hidden">
             <NavBarDefault />
           </div>
@@ -55,7 +55,7 @@ export default function Home() {
 
       {selectedLink === "Tudo" && (
         <div className="container mt-8 text-[#EBEFF8]">
-          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center bg-banner mr-4 ml-4 p-4 rounded-xl mt-[2rem] h-auto md:h-[164px]">
+          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center bg-banner mr-4 ml-4 md:mr-0 md:ml-0 p-4 rounded-xl mt-[2rem] h-auto md:h-[164px]">
             <img src="/logoBranca.png" className="w-[100px] md:w-[100px] lg:w-[122px] h-auto" />
             <h1 className="text-[20px] md:text-[32px] lg:text-[32px] md:text-left">
               Nosso propósito é impulsionar o seu projeto
