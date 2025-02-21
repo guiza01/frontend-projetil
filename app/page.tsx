@@ -100,90 +100,93 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             {projects.map((project) => (
-              <div
-                key={project.id}
-                className="bg-[#141824] hover:border hover:border-[#4761FF] p-4 rounded-xl shadow-lg transition-all duration-300"
-                onMouseEnter={() => setHoveredId(project.id)}
-                onMouseLeave={() => setHoveredId(null)}
-              >
-                <div className="relative w-full h-60 rounded-lg overflow-hidden">
-                  <img
-                    src={project.images?.find(img => img.isCover)?.urlImage || "/placeholder.jpg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover rounded-lg transition-opacity duration-300"
-                    style={{ opacity: hoveredId === project.id ? 0.2 : 1 }}
-                  />
-                  {hoveredId === project.id && (
-                    <div className="absolute inset-0 flex items-center justify-center text-white text-lg font-bold p-4 text-center">
-                      {project.description}
-                    </div>
-                  )}
-                </div>
+              <Link 
+                href={`/Details/${project.id}`} 
+                className="block"
+                key={project.id}>
+                <div
+                  className="bg-[#141824] hover:border hover:border-[#4761FF] p-4 rounded-xl shadow-lg transition-all duration-300 cursor-pointer"
+                  onMouseEnter={() => setHoveredId(project.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                >
+                  <div className="relative w-full h-60 rounded-lg overflow-hidden">
+                    <img
+                      src={project.images?.find(img => img.isCover)?.urlImage || "/placeholder.jpg"}
+                      alt={project.title}
+                      className="w-full h-full object-cover rounded-lg transition-opacity duration-300"
+                      style={{ opacity: hoveredId === project.id ? 0.2 : 1 }}
+                    />
+                    {hoveredId === project.id && (
+                      <div className="absolute inset-0 flex items-start justify-center text-[#EBEFF8] text-lg font-bold p-4 text-start">
+                        {project.description.length > 200
+                          ? project.description.slice(0, 200) + "..."
+                          : project.description}
+                      </div>
+                    )}
+                  </div>
 
-                <div className="flex justify-between">
-                  <h2 className="text-[20px] md:text-[24px] text-[#EBEFF8] font-bold mt-4">
-                    {project.title}
-                  </h2>
+                  <div className="flex justify-between">
+                    <h2 className="text-[20px] md:text-[24px] text-[#EBEFF8] font-bold mt-4">
+                      {project.title}
+                    </h2>
 
-                  <div
-                    className={`relative mt-4 max-h-[40px] hidden lg:block rounded-md p-[1px] transition-all ${hoveredId === project.id
-                      ? "bg-gradient-to-r from-[#00C0FF] via-[#4761FF] via-[#860DFF] via-[#C514C8] via-[#FF1A72] via-[#FF6F1E] to-[#FF8900]"
-                      : "bg-transparent"
-                      }`}
-                  >
-                    <Link href={`/Details/${project.id}`} className="w-full h-full">
+                    <div
+                      className={`relative mt-4 max-h-[40px] hidden lg:block rounded-md p-[1px] transition-all ${hoveredId === project.id
+                        ? "bg-gradient-to-r from-[#00C0FF] via-[#4761FF] via-[#860DFF] via-[#C514C8] via-[#FF1A72] via-[#FF6F1E] to-[#FF8900]"
+                        : "bg-transparent"
+                        }`}
+                    >
                       <button className="flex items-center justify-center w-full h-full bg-[#172250] text-[#EBEFF8] max-h-[40px] rounded-md px-3 py-2 transition-all hover:border-transparent">
                         <ArrowRight className="text-[#4761FF]" />
                       </button>
-                    </Link>
+                    </div>
+                  </div>
 
+                  <p className="text-[#EBEFF8] mt-2 line-clamp-2">{project.description}</p>
+
+                  <div className="flex gap-2 mt-4 flex-wrap">
+                    {project.languages.map((language) => (
+                      <div
+                        key={language.id}
+                        className="text-[#EBEFF8] border border-[#222A3B] rounded-md px-3 py-2 transition-all hover:bg-[#586175]"
+                      >
+                        {language.name}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="lg:hidden mt-4 w-full">
+                    <Button className="w-full bg-[#3C52EF] text-[#EBEFF8] hover:bg-[#3145D0]">
+                      Ver detalhes
+                    </Button>
                   </div>
                 </div>
-
-                <p className="text-[#EBEFF8] mt-2 line-clamp-2">{project.description}</p>
-
-                <div className="flex gap-2 mt-4 flex-wrap">
-                  {project.languages.map((language) => (
-                    <div
-                      key={language.id}
-                      className={`text-[#EBEFF8] border border-[#222A3B] rounded-md px-3 py-2 transition-all ${hoveredId === project.id ? 'bg-[#586175]' : ''}`}
-                    >
-                      {language.name}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="lg:hidden mt-4 w-full">
-                  <Button className="w-full bg-[#3C52EF] text-[#EBEFF8] hover:bg-[#3145D0]">
-                    <Link href={`/Details/${project.id}`}>
-                      Ver detalhes
-                    </Link>
-                  </Button>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
 
-          <div className="container flex flex-wrap justify-between mt-4 bg-[#141824] items-center">
-            <Button
-              variant="outline"
-              className="flex items-center bg-[#141924] text-[#AAB4CB] hover:bg-[#1f2635]"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              <FaArrowLeft className="mr-2" />
-              Anterior
-            </Button>
-            <span className="text-[#AAB4CB]">{currentPage} de {totalPages}</span>
-            <Button
-              variant="outline"
-              className="flex items-center bg-[#141924] text-[#AAB4CB] hover:bg-[#1f2635]"
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-            >
-              Próximo
-              <FaArrowRight className="ml-2" />
-            </Button>
+          <div className="py-10">
+            <div className="container flex flex-wrap justify-between mt-4 bg-[#141824] items-center">
+              <Button
+                variant="outline"
+                className="flex items-center bg-[#141924] text-[#AAB4CB] hover:bg-[#1f2635]"
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+              >
+                <FaArrowLeft className="mr-2" />
+                Anterior
+              </Button>
+              <span className="text-[#AAB4CB]">{currentPage} de {totalPages}</span>
+              <Button
+                variant="outline"
+                className="flex items-center bg-[#141924] text-[#AAB4CB] hover:bg-[#1f2635]"
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+              >
+                Próximo
+                <FaArrowRight className="ml-2" />
+              </Button>
+            </div>
           </div>
         </div>
       )

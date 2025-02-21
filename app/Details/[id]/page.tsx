@@ -71,7 +71,7 @@ export default function DetailsPage() {
     }
 
     return (
-        <div className="items-center bg-[#0C111C] justify-items-center mb-16 min-h-screen">
+        <div className="items-center bg-[#0C111C] justify-items-center min-h-screen">
             <nav className="w-full border-b border-[#222A3B] bg-[#141924]">
                 <div className="container mx-auto flex p-4 items-center relative">
                     <div className="block lg:hidden">
