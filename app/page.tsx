@@ -100,12 +100,12 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             {projects.map((project) => (
-              <Link 
-                href={`/Details/${project.id}`} 
+              <Link
+                href={`/Details/${project.id}`}
                 className="block"
                 key={project.id}>
                 <div
-                  className="bg-[#141824] hover:border hover:border-[#4761FF] p-4 rounded-xl shadow-lg transition-all duration-300 cursor-pointer"
+                  className="bg-[#141824] hover:border h-full hover:border-[#4761FF] p-4 rounded-xl shadow-lg cursor-pointer"
                   onMouseEnter={() => setHoveredId(project.id)}
                   onMouseLeave={() => setHoveredId(null)}
                 >
@@ -166,7 +166,7 @@ export default function Home() {
           </div>
 
           <div className="py-10">
-            <div className="container flex flex-wrap justify-between mt-4 bg-[#141824] items-center">
+            <div className="container flex flex-wrap justify-between mt-4 p-4 bg-[#141824] items-center">
               <Button
                 variant="outline"
                 className="flex items-center bg-[#141924] text-[#AAB4CB] hover:bg-[#1f2635]"
@@ -174,7 +174,7 @@ export default function Home() {
                 disabled={currentPage === 1}
               >
                 <FaArrowLeft className="mr-2" />
-                Anterior
+                <span className="hidden sm:inline-flex">Anterior</span>
               </Button>
               <span className="text-[#AAB4CB]">{currentPage} de {totalPages}</span>
               <Button
@@ -183,7 +183,7 @@ export default function Home() {
                 onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
               >
-                Próximo
+                <span className="hidden sm:inline-flex">Próximo</span>
                 <FaArrowRight className="ml-2" />
               </Button>
             </div>
