@@ -8,7 +8,6 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Carousel from "@/components/Carousel";
 import { ImageInterface } from "@/components/ImageInterface";
-import NavBarDefault from "@/components/NavBarDefault";
 import { useRouter } from "next/navigation";
 
 interface Project {
