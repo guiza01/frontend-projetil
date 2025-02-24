@@ -71,39 +71,20 @@ export default function DetailsPage() {
     }
 
     return (
-        <div className="items-center bg-[#0C111C] justify-items-center min-h-screen">
-            <nav className="w-full border-b border-[#222A3B] bg-[#141924]">
-                <div className="container mx-auto flex md:px-0 px-4 py-4 items-center relative">
-                    <div className="block lg:hidden">
-                        <NavBarDefault />
+        <div className="items-center bg-[#0C111C] justify-items-center min-h-screen pt-[80px]">
+            <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+                <nav className="w-full border-b border-[#222A3B] bg-[#141924] z-50">
+                    <div className="container mx-auto flex items-center gap-4 py-4 justify-start w-full">
+                        <button
+                            onClick={() => router.push("/")}
+                            className="bg-[#172250] hover:bg-[#172250] rounded-xl min-w-[60px] min-h-[50px] flex items-center justify-center ml-6 sm:ml-0"
+                        >
+                            <ArrowLeft className="text-[#4761FF] w-8 h-8" />
+                        </button>
+                        <h1 className="text-[#EBEFF8] text-[24px] sm:text-[24px] md:text-[24px] font-inter">Voltar</h1>
                     </div>
-                    <Link
-                        href="/"
-                        className="flex items-center w-full lg:w-auto lg:justify-between justify-start cursor-pointer"
-                    >
-                        <img
-                            src="/logoProjetil.png"
-                            className="mr-4 h-[28px] w-[42px] md:h-[39.84px] md:w-[59.77px]"
-                        />
-                        <h1 className="font-inter font-semibold text-[#EBEFF8] text-[24px] md:text-[28.46px]">
-                            Projétil
-                        </h1>
-                    </Link>
-
-                    <div className="hidden lg:flex items-center ml-16 text-[18px]">
-                        <NavBarDefault />
-                    </div>
-                </div>
-            </nav>
-            <div className="container flex items-center gap-4 mt-4 justify-start w-full">
-                <button
-                    onClick={() => router.push("/")}
-                    className="bg-[#172250] hover:bg-[#172250] rounded-xl min-w-[70px] min-h-[54px] flex items-center justify-center ml-6 sm:ml-0"
-                >
-                    <ArrowLeft className="text-[#4761FF] w-8 h-8" />
-                </button>
-                <h1 className="text-[#EBEFF8] text-[18px] sm:text-[20px] md:text-[24px] font-inter">Voltar</h1>
-            </div>
+                </nav>
+            </header>
 
             <div className="container mt-6 sm:mt-8 p-6 sm:p-8 md:p-12 flex flex-col md:flex-row bg-[#141924] rounded-xl w-full text-[#EBEFF8]">
                 <div className="w-full md:w-1/2 order-2 md:order-1">
