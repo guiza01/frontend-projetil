@@ -70,7 +70,7 @@ export default function DetailsPage() {
     }
 
     return (
-        <div className="items-center bg-[#0C111C] justify-items-center min-h-screen pt-[80px]">
+        <div className="items-center bg-[#0C111C] justify-items-center min-h-screen pt-[80px] md:px-16">
             <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
                 <nav className="w-full border-b border-[#222A3B] bg-[#141924] z-50">
                     <div className="container mx-auto flex items-center gap-4 py-4 justify-start w-full">

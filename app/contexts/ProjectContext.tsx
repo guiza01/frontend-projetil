@@ -31,6 +31,7 @@ interface ProjectContextType {
     setPageNumber: (pageNumber: number) => void;
     handleChange: (newSegmentId?: number, newPlatformId?: number, newLanguageId?: number) => void;
     handleRemoveFilters: VoidFunction;
+    //handleFilterProject: (title: string) => Promise<void>;
 }
 
 interface ProjectProviderProps {
@@ -91,6 +92,29 @@ export const ProjectProvider = ({ children }: ProjectProviderProps) => {
         setPlatformId(undefined);
         setLanguageId(undefined);
     };
+
+    // const handleFilterProject = async (title: string) => {
+    //     if (title.length < 3) {
+    //         const data = await projectService.getAllProjects(pageNumber, totalPages * itemsPerPage);
+    //         setProjects(data.items);
+    //         return;
+    //     }
+
+    //     try {
+    //         const data = await projectService.getAllProjects(pageNumber, totalPages * itemsPerPage);
+
+    //         const filteredProjects = data.items.filter((project) => {
+    //             const projectTitle = project.title.toLowerCase().trim();
+    //             const searchTitle = title.toLowerCase().trim();
+
+    //             return projectTitle.includes(searchTitle);
+    //         });
+
+    //         setProjects(filteredProjects);
+    //     } catch (error) {
+    //         console.error("Error fetching projects:", error);
+    //     }
+    // };
 
     return (
         <ProjectContext.Provider value={{

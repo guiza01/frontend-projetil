@@ -10,7 +10,7 @@ import { useProjectContext } from "./contexts/ProjectContext";
 
 export default function Home() {
   const [selectedLink] = useState("Tudo");
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchTerm] = useState<string>("");
 
   const [hoveredId, setHoveredId] = useState<number | null>();
 
@@ -23,7 +23,8 @@ export default function Home() {
     languageId,
     handlePageChange,
     fetchProjects,
-    handleRemoveFilters
+    handleRemoveFilters,
+    //handleFilterProject
   } = useProjectContext();
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="items-center bg-[#0C111C] justify-items-center min-h-screen pt-[80px]">
+    <div className="items-center bg-[#0C111C] justify-items-center min-h-screen pt-[80px] md:px-16">
       <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
         <nav className="w-full border-b border-[#222A3B] bg-[#141924]">
           <div className="container mx-auto flex md:px-0 px-4 py-4 items-center relative">
@@ -75,8 +76,8 @@ export default function Home() {
               <input
                 type="text"
                 placeholder="O que você procura?"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                value={undefined}
+                //onChange={(e) => handleFilterProject(e.target.value)}
                 className="w-full md:w-[750px] border border-[#222A3B] pl-10 bg-[#141924] text-[#AAB4CB] p-2 rounded-xl"
               />
             </div>
