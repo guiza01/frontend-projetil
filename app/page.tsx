@@ -10,7 +10,7 @@ import { useProjectContext } from "./contexts/ProjectContext";
 
 export default function Home() {
   const [selectedLink] = useState("Tudo");
-  const [searchTerm] = useState<string>("");
+  //const [searchTerm] = useState<string>("");
 
   const [hoveredId, setHoveredId] = useState<number | null>();
 
