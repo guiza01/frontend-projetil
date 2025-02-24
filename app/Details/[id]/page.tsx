@@ -77,7 +77,10 @@ export default function DetailsPage() {
                     <div className="block lg:hidden">
                         <NavBarDefault />
                     </div>
-                    <div className="flex items-center w-full lg:w-auto lg:justify-between justify-start">
+                    <Link
+                        href="/"
+                        className="flex items-center w-full lg:w-auto lg:justify-between justify-start cursor-pointer"
+                    >
                         <img
                             src="/logoProjetil.png"
                             className="mr-4 h-[28px] w-[42px] md:h-[39.84px] md:w-[59.77px]"
@@ -85,7 +88,8 @@ export default function DetailsPage() {
                         <h1 className="font-inter font-semibold text-[#EBEFF8] text-[24px] md:text-[28.46px]">
                             Projétil
                         </h1>
-                    </div>
+                    </Link>
+
                     <div className="hidden lg:flex items-center ml-16 text-[18px]">
                         <NavBarDefault />
                     </div>

@@ -22,7 +22,8 @@ export default function Home() {
     platformId,
     languageId,
     handlePageChange,
-    fetchProjects
+    fetchProjects,
+    handleRemoveFilters
   } = useProjectContext();
 
   useEffect(() => {
@@ -38,6 +39,9 @@ export default function Home() {
           <div className="block lg:hidden">
             <NavBarDefault />
           </div>
+          <button
+            onClick={handleRemoveFilters}
+          >
           <div className="flex items-center w-full lg:w-auto lg:justify-between justify-start">
             <img
               src="/logoProjetil.png"
@@ -47,6 +51,7 @@ export default function Home() {
               Projétil
             </h1>
           </div>
+          </button>
           <div className="hidden lg:flex items-center ml-16 text-[18px]">
             <NavBarDefault />
           </div>
