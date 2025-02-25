@@ -10,7 +10,6 @@ import { useProjectContext } from "./contexts/ProjectContext";
 
 export default function Home() {
   const [selectedLink] = useState("Tudo");
-  //const [searchTerm] = useState<string>("");
 
   const [hoveredId, setHoveredId] = useState<number | null>();
 
@@ -24,7 +23,7 @@ export default function Home() {
     handlePageChange,
     fetchProjects,
     handleRemoveFilters,
-    //handleFilterProject
+    handleFilterProject
   } = useProjectContext();
 
   useEffect(() => {
@@ -77,7 +76,7 @@ export default function Home() {
                 type="text"
                 placeholder="O que você procura?"
                 value={undefined}
-                //onChange={(e) => handleFilterProject(e.target.value)}
+                onChange={(e) => handleFilterProject(e.target.value)}
                 className="w-full md:w-[750px] border border-[#222A3B] pl-10 bg-[#141924] text-[#AAB4CB] p-2 rounded-xl"
               />
             </div>
